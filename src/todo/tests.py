@@ -93,4 +93,3 @@ class TestDeleteAllItems(APITestCase):
 
   def test_all_items_were_deleted(self):
     self.assertEqual(TodoItem.objects.count(), 0)
-    

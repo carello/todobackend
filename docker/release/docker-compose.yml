@@ -30,11 +30,10 @@ test:
 
 
 nginx:
-  image: nginx
+  build: .
+  dockerfile: Dockerfile.nginx
   links:
     - app
-  volumes:
-    - ./todobackend.conf:/etc/nginx/conf.d/todobackend.conf
   ports:
     - "8000:8000"
   volumes_from:
@@ -62,10 +61,9 @@ db:
 
 agent:
   image: carello/ansible
-  volumes:
-    - ../../ansible/probe.yml:/ansible/site.yml
   links:
     - db
   environment:
     PROBE_HOST: "db"
     PROBE_POST: "3306"
+  command: ["probe.yml"]
